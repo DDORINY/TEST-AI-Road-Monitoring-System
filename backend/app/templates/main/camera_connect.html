@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}Camera Monitoring | 404 R.N.F AI{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/camera_connect.css') }}?v=6">
+{% endblock %}
+
+{% block content %}
+  <section
+    class="camera-connect"
+    data-ipcam-server-url="{{ ipcam_server_url }}"
+    data-usb-camera-index="{{ usb_camera_index }}"
+  >
+    <div class="camera-connect-header">
+      <h1>모니터링</h1>
+      <div class="camera-header-actions">
+        <button type="button" class="camera-action primary" id="connectAllCamerasButton">Connect All</button>
+        <button type="button" class="camera-action" id="disconnectAllCamerasButton">Disconnect All</button>
+        <a class="camera-action link" href="{{ url_for('realtime_monitor.realtime_monitor_page') }}">Risk Monitor</a>
+      </div>
+    </div>
+
+    <div class="camera-grid">
+      <article class="camera-panel" data-camera-panel="ipcam1">
+        <div class="camera-panel-header">
+          <h2>IP CAM 1</h2>
+          <div class="camera-status-row">
+            <span class="camera-status-dot"></span>
+            <span class="camera-status-text">Idle</span>
+          </div>
+        </div>
+        <div class="camera-stage">
+          <img class="camera-stream" data-camera-stream="ipcam1" alt="IP CAM 1 stream" hidden>
+          <div class="camera-placeholder">
+            <strong>IP CAM 1</strong>
+            <span>Shows the RTSP camera stream.</span>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button type="button" class="camera-action primary" data-camera-connect="ipcam1">Connect</button>
+          <button type="button" class="camera-action" data-camera-disconnect="ipcam1">Disconnect</button>
+        </div>
+      </article>
+
+      <article class="camera-panel" data-camera-panel="ipcam2">
+        <div class="camera-panel-header">
+          <h2>IP CAM 2</h2>
+          <div class="camera-status-row">
+            <span class="camera-status-dot"></span>
+            <span class="camera-status-text">Idle</span>
+          </div>
+        </div>
+        <div class="camera-stage">
+          <img class="camera-stream" data-camera-stream="ipcam2" alt="IP CAM 2 stream" hidden>
+          <div class="camera-placeholder">
+            <strong>IP CAM 2</strong>
+            <span>Set IPCAM_RTSP_URL_2 in .env.</span>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button type="button" class="camera-action primary" data-camera-connect="ipcam2">Connect</button>
+          <button type="button" class="camera-action" data-camera-disconnect="ipcam2">Disconnect</button>
+        </div>
+      </article>
+
+      <article class="camera-panel" data-camera-panel="ipcam3">
+        <div class="camera-panel-header">
+          <h2>IP CAM 3</h2>
+          <div class="camera-status-row">
+            <span class="camera-status-dot"></span>
+            <span class="camera-status-text">Idle</span>
+          </div>
+        </div>
+        <div class="camera-stage">
+          <img class="camera-stream" data-camera-stream="ipcam3" alt="IP CAM 3 stream" hidden>
+          <div class="camera-placeholder">
+            <strong>IP CAM 3</strong>
+            <span>Set IPCAM_RTSP_URL_3 in .env.</span>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button type="button" class="camera-action primary" data-camera-connect="ipcam3">Connect</button>
+          <button type="button" class="camera-action" data-camera-disconnect="ipcam3">Disconnect</button>
+        </div>
+      </article>
+
+      <article class="camera-panel" data-camera-panel="usb">
+        <div class="camera-panel-header">
+          <h2>USB CAM</h2>
+          <div class="camera-status-row">
+            <span class="camera-status-dot"></span>
+            <span class="camera-status-text">Idle</span>
+          </div>
+        </div>
+        <div class="camera-stage">
+          <img class="camera-stream" data-camera-stream="usb" alt="USB CAM stream" hidden>
+          <div class="camera-placeholder">
+            <strong>USB CAM</strong>
+            <span>Shows the USB camera attached to the server.</span>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button type="button" class="camera-action primary" data-camera-connect="usb">Connect</button>
+          <button type="button" class="camera-action" data-camera-disconnect="usb">Disconnect</button>
+        </div>
+      </article>
+
+      <article class="camera-panel" data-camera-panel="webcam">
+        <div class="camera-panel-header">
+          <h2>WebCam</h2>
+          <div class="camera-status-row">
+            <span class="camera-status-dot"></span>
+            <span class="camera-status-text">Idle</span>
+          </div>
+        </div>
+        <div class="camera-stage">
+          <video class="camera-stream" data-camera-stream="webcam" autoplay playsinline muted hidden></video>
+          <div class="camera-placeholder">
+            <strong>WebCam</strong>
+            <span>Shows the browser camera after permission is allowed.</span>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button type="button" class="camera-action primary" data-camera-connect="webcam">Connect</button>
+          <button type="button" class="camera-action" data-camera-disconnect="webcam">Disconnect</button>
+        </div>
+      </article>
+    </div>
+
+    <section class="its-cctv-section">
+      <div class="its-cctv-header">
+        <div>
+          <h2>ITS CCTV</h2>
+          <p>Select a region and choose a CCTV stream.</p>
+        </div>
+        <div class="its-cctv-filter">
+          <select id="itsRegionSelect" class="its-region-select" aria-label="ITS CCTV region"></select>
+          <button type="button" class="camera-action primary" id="loadItsCctvButton">Load CCTV</button>
+        </div>
+      </div>
+
+      <div class="its-cctv-layout">
+        <div class="its-cctv-list-wrap">
+          <div class="its-cctv-status" id="itsCctvStatus">Region list loading</div>
+          <div class="its-cctv-list" id="itsCctvList"></div>
+        </div>
+        <div class="its-cctv-player">
+          <video id="itsCctvPlayer" controls autoplay muted playsinline></video>
+          <div class="its-cctv-placeholder" id="itsCctvPlaceholder">
+            <strong>ITS CCTV</strong>
+            <span>Select a CCTV item to play the live HLS stream.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="camera-zoom-modal" id="cameraZoomModal" hidden>
+      <div class="camera-zoom-backdrop" data-zoom-close></div>
+      <div class="camera-zoom-dialog" role="dialog" aria-modal="true" aria-labelledby="cameraZoomTitle">
+        <div class="camera-zoom-header">
+          <h2 id="cameraZoomTitle">Camera</h2>
+          <button type="button" class="camera-zoom-close" data-zoom-close aria-label="Close">x</button>
+        </div>
+        <div class="camera-zoom-stage" id="cameraZoomStage"></div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+  <script src="{{ url_for('static', filename='js/camera_connect.js') }}?v=6"></script>
+{% endblock %}

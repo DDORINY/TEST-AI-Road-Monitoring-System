@@ -1,0 +1,39 @@
+.server-status-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background: #0f172a;
+}
+
+.status-item .label {
+  color: #d1d5db;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status.green {
+  color: #22c55e;
+}
+
+.status.red {
+  color: #ef4444;
+}
+
+.status.gray {
+  color: #9ca3af;
+}

@@ -1,0 +1,163 @@
+.camera-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.camera-loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}
+
+.camera-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.camera-header h1 {
+  color: #333;
+  margin: 0;
+}
+
+.refresh-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.refresh-btn:hover {
+  background: #0056b3;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.camera-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+
+.camera-list {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.camera-list h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.camera-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.camera-item {
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.camera-item:hover {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.camera-item.active {
+  border-color: #007bff;
+  background: #e7f3ff;
+}
+
+.camera-info h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.camera-info p {
+  margin: 4px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.camera-viewer {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.viewer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.viewer-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.close-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.close-btn:hover {
+  background: #c82333;
+}
+
+.no-camera {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+}
+
+.no-camera p {
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .camera-content {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-list {
+    order: 2;
+  }
+
+  .camera-viewer {
+    order: 1;
+  }
+}
